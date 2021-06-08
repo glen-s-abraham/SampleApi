@@ -1,0 +1,138 @@
+->use 'unsignedBigInteger' for foreign key contraints
+
+Faoctories for databse seeding
+
+stored inside database>factories
+
+The definition method returns the default set of attribute values that should be applied when creating a model using the factory.
+
+
+https://laravel.com/docs/8.x/database-testing#defining-model-factories
+
+
+#php artisan make:factory PostFactory
+#php artisan make:factory PostFactory --model=Post
+
+Factories are used in databaseseeder to fillup the database
+
+Migrations and seeder execution
+
+#php artisan migrate
+#php artisan db:seed
+
+//seller and buyer table need to be pointed to user
+
+go to the abstract data model and add
+
+protected $table ='tablename'
+
+check wether a model has changed
+#isDirty()
+
+ex:$user->isDirty()
+
+for put patch and del methods send in data as
+-x-www-formurlencoded
+
+API optimization
+
+1.Mutators and accessors for models
+
+-mutators are custom user functions in model to aedit the attributes before it's written into the database.
+
+syntax: public function set[Name of attrobute]Attribute($var)
+{
+	
+}
+
+-accessors-model methods used to modify the attributes fetched from the datbase before returning them.
+syntax: public function get[Name of attrobute]Attribute($var)
+{
+	
+}
+
+2.Generalizing the response methods
+
+-repeating response codes are encountered through out the controllers,
+
+solution:create a basecontroller with the response methods.
+
+#php artisan make:controller ApiController
+
+extend the ApiController wherever required
+
+make a directory to store the traits files.
+
+Traits are a mechanism for code reuse in single inheritance languages such as PHP. A Trait is intended to reduce some limitations of single inheritance by enabling a developer to reuse sets of methods freely in several independent classes living in different class hierarchies. The semantics of the combination of Traits and classes is defined in a way which reduces complexity, and avoids the typical problems associated with multiple inheritance and Mixins.
+
+https://www.php.net/manual/en/language.oop5.traits.php
+
+-Ways to implement the genaralized trait.
+
+1.use it in every controller.Not completely practical.
+
+2.use the trait in ApiController thus it's naturally inherited.
+
+
+Error Handling
+
+1.returning validation errors as json
+
+use the Exception/Handler.php to hande errors
+
+the register method  renderable() instanc eallow you to return custom responses.
+
+
+Implicit model binding
+
+
+-resolve an instance of a model automaticaly from id
+
+Ex:public function show($id)=>public function show(User $user)
+
+
+-global scopes
+queries or part of queriess that we can add to the operations of the model.
+
+
+>create a Scopes directory and create a BuyerScope.php
+
+Soft Delete
+
+-basically a way to remove an instance from a collection without actually removing it from the databse.
+-go to migrations
+-add a new field $table->softDeletes() -creates a field named deletedAt.
+
+-using softdeletes for models
+
+go to models add an instance of SoftDeletes.
+
+use SoftDeletes;
+
+protected $dates=['delted_at'];
+
+-after deletion the model stiolls exists in the database but will be shown deleted to the application.
+
+Complex controllers
+
+-ones which use two or more resources(models)
+
+ex:transaction category.
+
+#with()
+selects items within a colection
+
+#pluck()
+selects particular index from wihin a list
+
+#collapse()
+unifies a collection of lists
+
+#unique()
+removes duplicates
+
+#values()
+removes empty indeces from the list
+
+#whereHas()
+verifies wether a condition exists between models
