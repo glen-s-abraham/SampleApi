@@ -169,11 +169,21 @@ a new command will be added for making transformer
 
 import transformer in model
 
-Sorting
+Sorting & filtering
 
 -create a function in the transformer to obtain the original field name of the transformed object call the function in sortmethod to fetch the original attribute by which the data need to be sorted.
 
-Filetring data
+Pagination
 
+-paginate() method can be used for eloquent collections
 
+-traditional pagination -can be implented on simple collections
 
+-caching 
+
+store state of database for a period to reduce load on databse.
+
+Cache::remember(distinguisher,time in seconds,function() use($data){
+	
+	return $data;
+});
