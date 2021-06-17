@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-
+use App\Transformers\UserTransformer;
 
 class User extends Authenticatable
 {
@@ -28,6 +28,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public $transformer=UserTransformer::class;
     protected $table='users';
     protected $fillable = [
         'name',
@@ -63,12 +64,12 @@ class User extends Authenticatable
 
     public function isVerified()
     {
-        return $this->verified==VERIFIED_USER;
+        return $this->verified==self::VERIFIED_USER;
     }
 
     public function isAdmin()
     {
-        return $this->admin==ADMIN_USER;
+        return $this->admin==self::ADMIN_USER;
     }
 
     public static function generateVerificationCode()

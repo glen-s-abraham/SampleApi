@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Category;
 use App\Models\Seller;
 use App\Models\Transaction;
-
+use App\Transformers\ProductTransformer;
 class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+    public $transformer=ProductTransformer::class;
     protected $dates=['deleted_at'];
 
     protected $hidden=[
@@ -23,7 +23,7 @@ class Product extends Model
     const AVAILABLE_PRODUCT="available";
     const UNAVAILABLE_PRODUCT="unavailable";
 
-    protected $fillabel=[
+    protected $fillable=[
         "name",
         "description",
         "quantity",
@@ -36,7 +36,7 @@ class Product extends Model
     //is product available
     public function isAvailable()
     {
-        return $this->status==Prodct::AVAILABLE_PRODUCT;
+        return $this->status==self::AVAILABLE_PRODUCT;
     }
 
     //products category relationship

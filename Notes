@@ -136,3 +136,44 @@ removes empty indeces from the list
 
 #whereHas()
 verifies wether a condition exists between models
+
+Middlewares
+-allow us to innteract directly with a request and a response.
+-perform any changes witj the contents of a request
+
+Creating a custom middleware
+
+Rate limiting middleware
+-throttle-in kernel
+
+accepts parameters xrate limit:no of requests a client can send
+waiting time-amount of time the client hast to wait after limit
+
+Transformers
+
+change response parameters.
+
+https://fractal.thephpleague.com/
+
+-composer require spatie/laravel-fractal
+-go to config>app.php
+
+
+-in providers add 
+-Spatie\Fractal\FractalServiceProvider::class
+
+
+a new command will be added for making transformer
+
+#make:transformer <transformername>
+
+import transformer in model
+
+Sorting
+
+-create a function in the transformer to obtain the original field name of the transformed object call the function in sortmethod to fetch the original attribute by which the data need to be sorted.
+
+Filetring data
+
+
+

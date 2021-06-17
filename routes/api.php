@@ -38,6 +38,8 @@ Route::resource('seller.categories','Seller\SellerCategoriesController')->only([
 
 Route::resource('seller.buyers','Seller\SellerBuyersController')->only(['index']);
 
+Route::resource('seller.products','Seller\SellerProductsController')->except(['create','show','edit']);
+
 /**
  * Categories
  */
@@ -55,6 +57,14 @@ Route::resource('category.buyers','Category\CategoryBuyersController')->only(['i
  *Products
  */
 Route::resource('products','Product\ProductController')->only(['index','show']);
+
+Route::resource('product.transactions','Product\ProductTransactionsController')->only(['index']);
+
+Route::resource('product.buyers','Product\ProductBuyersController')->only(['index']);
+
+Route::resource('product.categories','Product\ProductcategoriesController')->only(['index','store','update','destroy']);
+Route::resource('product.buyer.transaction','Product\ProductBuyerTransactionController')->only(['store']);
+
 
 /**
  *Transactions
